@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 
 export const CustomCursor: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
   const dotRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -11,13 +12,26 @@ export const CustomCursor: React.FC = () => {
     }
 
     const cursor = cursorRef.current;
+    const ring = ringRef.current;
     const dot = dotRef.current;
-    if (!cursor || !dot) return;
+    if (!cursor || !ring || !dot) return;
+
+    let rafId: number | null = null;
+    let targetX = -100;
+    let targetY = -100;
+
+    const render = () => {
+      cursor.style.transform = `translate3d(${targetX}px, ${targetY}px, 0)`;
+      dot.style.transform = `translate3d(${targetX}px, ${targetY}px, 0)`;
+      rafId = null;
+    };
 
     const handleMouseMove = (e: MouseEvent) => {
-      // 1:1 Instant hardware tracking without any delay or interpolation jumping
-      cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
-      dot.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+      targetX = e.clientX;
+      targetY = e.clientY;
+      if (!rafId) {
+        rafId = requestAnimationFrame(render);
+      }
     };
 
     const handleMouseOver = (e: MouseEvent) => {
@@ -35,9 +49,9 @@ export const CustomCursor: React.FC = () => {
       );
 
       if (isInteractive) {
-        cursor.classList.add('cursor-hovered');
+        ring.classList.add('cursor-hovered');
       } else {
-        cursor.classList.remove('cursor-hovered');
+        ring.classList.remove('cursor-hovered');
       }
     };
 
@@ -45,6 +59,7 @@ export const CustomCursor: React.FC = () => {
     window.addEventListener('mouseover', handleMouseOver, { passive: true });
 
     return () => {
+      if (rafId) cancelAnimationFrame(rafId);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseover', handleMouseOver);
     };
@@ -52,16 +67,23 @@ export const CustomCursor: React.FC = () => {
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[9999] overflow-hidden select-none">
-      {/* Outer Ring: Statically centered on cursor tip, expands purely via scale from center */}
+      {/* Outer Translation Shell (zero CSS transition on position for 1:1 instantaneous tracking) */}
       <div
         ref={cursorRef}
-        className="fixed top-0 left-0 -ml-3 -mt-3 w-6 h-6 rounded-full border border-[#E25822]/40 pointer-events-none transition-[border-color,background-color,transform] duration-200 ease-out will-change-transform [&.cursor-hovered]:scale-150 [&.cursor-hovered]:border-[#E25822] [&.cursor-hovered]:bg-[#E25822]/15"
+        className="fixed top-0 left-0 pointer-events-none will-change-transform"
         style={{ transform: 'translate3d(-100px, -100px, 0)' }}
-      />
+      >
+        {/* Outer Ring: Handles smooth scale & color transition centered on cursor */}
+        <div
+          ref={ringRef}
+          className="-ml-3 -mt-3 w-6 h-6 rounded-full border border-[#E25822]/40 pointer-events-none transition-[border-color,background-color,transform] duration-200 ease-out will-change-transform [&.cursor-hovered]:scale-150 [&.cursor-hovered]:border-[#E25822] [&.cursor-hovered]:bg-[#E25822]/15"
+        />
+      </div>
+
       {/* Center Precise Dot */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 -ml-[2px] -mt-[2px] w-1 h-1 bg-[#E25822] rounded-full pointer-events-none shadow-[0_0_6px_#E25822]"
+        className="fixed top-0 left-0 -ml-[2px] -mt-[2px] w-1 h-1 bg-[#E25822] rounded-full pointer-events-none shadow-[0_0_6px_#E25822] will-change-transform"
         style={{ transform: 'translate3d(-100px, -100px, 0)' }}
       />
     </div>

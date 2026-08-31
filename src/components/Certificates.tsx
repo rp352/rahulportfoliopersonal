@@ -49,7 +49,7 @@ export const Certificates: React.FC = () => {
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.7, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
             onClick={() => setSelectedCert(cert)}
-            className="editorial-card rounded-xl p-6 sm:p-8 cursor-pointer group flex flex-col justify-between"
+            className="editorial-card rounded-xl p-6 sm:p-8 cursor-pointer group flex flex-col justify-between transform-gpu will-change-transform"
           >
             <div>
               {/* Header Spec */}

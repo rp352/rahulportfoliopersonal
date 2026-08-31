@@ -113,7 +113,7 @@ function Dock({
           mouseX.set(Infinity);
         }}
         className={cn(
-          'flex w-fit items-center gap-2 sm:gap-3 rounded-2xl bg-[#111115]/90 border border-white/10 px-3 py-2 shadow-2xl backdrop-blur-xl shadow-black/80',
+          'flex w-fit items-center gap-2 sm:gap-3 rounded-2xl bg-[#111115]/90 border border-white/10 px-3 py-2 shadow-2xl shadow-black/80',
           className
         )}
         style={{ height: panelHeight }}
@@ -132,10 +132,28 @@ function DockItem({ children, className, onClick }: DockItemProps) {
   const ref = useRef<HTMLDivElement>(null);
   const { distance, magnification, mouseX, spring } = useDock();
   const isHovered = useMotionValue(0);
+  const rectRef = useRef<{ x: number; width: number } | null>(null);
+
+  const updateRect = () => {
+    if (ref.current) {
+      const domRect = ref.current.getBoundingClientRect();
+      rectRef.current = { x: domRect.x, width: domRect.width };
+    }
+  };
+
+  useEffect(() => {
+    updateRect();
+    window.addEventListener('resize', updateRect, { passive: true });
+    return () => window.removeEventListener('resize', updateRect);
+  }, []);
 
   const mouseDistance = useTransform(mouseX, (val) => {
-    const domRect = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
-    return val - (domRect.x + domRect.width / 2);
+    if (val === Infinity) return Infinity;
+    if (!rectRef.current) {
+      updateRect();
+    }
+    const rect = rectRef.current ?? { x: 0, width: 40 };
+    return val - (rect.x + rect.width / 2);
   });
 
   const widthTransform = useTransform(
@@ -150,7 +168,11 @@ function DockItem({ children, className, onClick }: DockItemProps) {
     <motion.div
       ref={ref}
       style={{ width }}
-      onHoverStart={() => isHovered.set(1)}
+      onMouseEnter={updateRect}
+      onHoverStart={() => {
+        updateRect();
+        isHovered.set(1);
+      }}
       onHoverEnd={() => isHovered.set(0)}
       onFocus={() => isHovered.set(1)}
       onBlur={() => isHovered.set(0)}

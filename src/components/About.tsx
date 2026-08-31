@@ -55,121 +55,118 @@ export const About: React.FC = () => {
     const s3 = s3Ref.current;
     if (!section || !container || !s1 || !s2 || !s3) return;
 
-    const s1Words = s1.querySelectorAll<HTMLElement>('.word');
-    const s2Words = s2.querySelectorAll<HTMLElement>('.word');
-    const s3Words = s3.querySelectorAll<HTMLElement>('.word');
+    const ctx = gsap.context(() => {
+      const s1Words = s1.querySelectorAll<HTMLElement>('.word');
+      const s2Words = s2.querySelectorAll<HTMLElement>('.word');
+      const s3Words = s3.querySelectorAll<HTMLElement>('.word');
 
-    // Initial state: s1 visible, s2 and s3 hidden
-    gsap.set(s1, { opacity: 1, y: 0 });
-    gsap.set(s1Words, { opacity: 0.15, filter: 'blur(5px)' });
+      // Initial state: s1 visible, s2 and s3 hidden with GPU layer hints
+      gsap.set(s1, { opacity: 1, y: 0, willChange: 'opacity, transform' });
+      gsap.set(s1Words, { opacity: 0.18, y: 2, willChange: 'opacity, transform' });
 
-    gsap.set(s2, { opacity: 0, y: 20 });
-    gsap.set(s2Words, { opacity: 0.15, filter: 'blur(5px)' });
+      gsap.set(s2, { opacity: 0, y: 20, willChange: 'opacity, transform' });
+      gsap.set(s2Words, { opacity: 0.18, y: 2, willChange: 'opacity, transform' });
 
-    gsap.set(s3, { opacity: 0, y: 20 });
-    gsap.set(s3Words, { opacity: 0.15, filter: 'blur(5px)' });
+      gsap.set(s3, { opacity: 0, y: 20, willChange: 'opacity, transform' });
+      gsap.set(s3Words, { opacity: 0.18, y: 2, willChange: 'opacity, transform' });
 
-    // GSAP Master Scroll Timeline with Pinning
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: 'top 12%',
-        end: '+=160%',
-        pin: container,
-        pinSpacing: true,
-        scrub: 0.8,
-        anticipatePin: 1,
-      },
-    });
+      // GSAP Master Scroll Timeline with Pinning
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 12%',
+          end: '+=160%',
+          pin: container,
+          pinSpacing: true,
+          scrub: 0.5,
+          anticipatePin: 1,
+        },
+      });
 
-    // ==========================================
-    // PHASE 1: Sentence 1 words reveal
-    // ==========================================
-    tl.to(s1Words, {
-      opacity: 1,
-      filter: 'blur(0px)',
-      stagger: 0.04,
-      duration: 1,
-      ease: 'none',
-    });
+      // ==========================================
+      // PHASE 1: Sentence 1 words reveal
+      // ==========================================
+      tl.to(s1Words, {
+        opacity: 1,
+        y: 0,
+        stagger: 0.04,
+        duration: 1,
+        ease: 'none',
+      });
 
-    // Hold sentence 1 briefly
-    tl.to({}, { duration: 0.3 });
+      // Hold sentence 1 briefly
+      tl.to({}, { duration: 0.3 });
 
-    // Sentence 1 fades out upward
-    tl.to(s1, {
-      opacity: 0,
-      y: -25,
-      filter: 'blur(6px)',
-      duration: 0.5,
-      ease: 'power2.inOut',
-    });
+      // Sentence 1 fades out upward
+      tl.to(s1, {
+        opacity: 0,
+        y: -20,
+        duration: 0.45,
+        ease: 'power2.inOut',
+      });
 
-    // ==========================================
-    // PHASE 2: Sentence 2 takes its place & words reveal
-    // ==========================================
-    tl.to(s2, {
-      opacity: 1,
-      y: 0,
-      duration: 0.3,
-      ease: 'power2.out',
-    });
+      // ==========================================
+      // PHASE 2: Sentence 2 takes its place & words reveal
+      // ==========================================
+      tl.to(s2, {
+        opacity: 1,
+        y: 0,
+        duration: 0.3,
+        ease: 'power2.out',
+      });
 
-    if (step2DotRef.current) {
-      tl.to(step2DotRef.current, { backgroundColor: '#E25822', width: 24, duration: 0.3 }, '<');
-    }
-
-    tl.to(s2Words, {
-      opacity: 1,
-      filter: 'blur(0px)',
-      stagger: 0.04,
-      duration: 1,
-      ease: 'none',
-    });
-
-    // Hold sentence 2 briefly
-    tl.to({}, { duration: 0.3 });
-
-    // Sentence 2 fades out upward
-    tl.to(s2, {
-      opacity: 0,
-      y: -25,
-      filter: 'blur(6px)',
-      duration: 0.5,
-      ease: 'power2.inOut',
-    });
-
-    // ==========================================
-    // PHASE 3: Sentence 3 takes its place & words reveal
-    // ==========================================
-    tl.to(s3, {
-      opacity: 1,
-      y: 0,
-      duration: 0.3,
-      ease: 'power2.out',
-    });
-
-    if (step3DotRef.current) {
-      tl.to(step3DotRef.current, { backgroundColor: '#E25822', width: 24, duration: 0.3 }, '<');
-    }
-
-    tl.to(s3Words, {
-      opacity: 1,
-      filter: 'blur(0px)',
-      stagger: 0.04,
-      duration: 1,
-      ease: 'none',
-    });
-
-    // Hold sentence 3 at the end before releasing pin
-    tl.to({}, { duration: 0.4 });
-
-    return () => {
-      if (tl.scrollTrigger) {
-        tl.scrollTrigger.kill();
+      if (step1DotRef.current && step2DotRef.current) {
+        tl.to(step1DotRef.current, { backgroundColor: 'rgba(255, 255, 255, 0.2)', scaleX: 0.5, transformOrigin: 'left center', duration: 0.25 }, '<');
+        tl.to(step2DotRef.current, { backgroundColor: '#E25822', scaleX: 2, transformOrigin: 'left center', duration: 0.25 }, '<');
       }
-      tl.kill();
-    };
+
+      tl.to(s2Words, {
+        opacity: 1,
+        y: 0,
+        stagger: 0.04,
+        duration: 1,
+        ease: 'none',
+      });
+
+      // Hold sentence 2 briefly
+      tl.to({}, { duration: 0.3 });
+
+      // Sentence 2 fades out upward
+      tl.to(s2, {
+        opacity: 0,
+        y: -20,
+        duration: 0.45,
+        ease: 'power2.inOut',
+      });
+
+      // ==========================================
+      // PHASE 3: Sentence 3 takes its place & words reveal
+      // ==========================================
+      tl.to(s3, {
+        opacity: 1,
+        y: 0,
+        duration: 0.3,
+        ease: 'power2.out',
+      });
+
+      if (step2DotRef.current && step3DotRef.current) {
+        tl.to(step2DotRef.current, { backgroundColor: 'rgba(255, 255, 255, 0.2)', scaleX: 1, transformOrigin: 'left center', duration: 0.25 }, '<');
+        tl.to(step3DotRef.current, { backgroundColor: '#E25822', scaleX: 2, transformOrigin: 'left center', duration: 0.25 }, '<');
+      }
+
+      tl.to(s3Words, {
+        opacity: 1,
+        y: 0,
+        stagger: 0.04,
+        duration: 1,
+        ease: 'none',
+      });
+
+      // Hold sentence 3 at the end before releasing pin
+      tl.to({}, { duration: 0.4 });
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -200,9 +197,9 @@ export const About: React.FC = () => {
               {/* Progress Indicator */}
               <div className="flex items-center space-x-2 mt-4 font-mono text-[10px] text-[#8e8e9b]">
                 <div className="flex space-x-1.5 items-center">
-                  <div ref={step1DotRef} className="h-1 w-6 rounded-full bg-[#E25822] transition-all" />
-                  <div ref={step2DotRef} className="h-1 w-3 rounded-full bg-white/20 transition-all" />
-                  <div ref={step3DotRef} className="h-1 w-3 rounded-full bg-white/20 transition-all" />
+                  <div ref={step1DotRef} className="h-1 w-6 rounded-full bg-[#E25822] origin-left will-change-transform" />
+                  <div ref={step2DotRef} className="h-1 w-3 rounded-full bg-white/20 origin-left will-change-transform" />
+                  <div ref={step3DotRef} className="h-1 w-3 rounded-full bg-white/20 origin-left will-change-transform" />
                 </div>
                 <span className="pl-2">SCROLL TO ADVANCE</span>
               </div>

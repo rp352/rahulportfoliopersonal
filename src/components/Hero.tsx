@@ -29,10 +29,14 @@ export const Hero: React.FC = () => {
       className="relative min-h-screen w-full bg-[#0a0a0c] text-[#f4f4f6] flex flex-col justify-between pt-24 sm:pt-28 pb-6 px-6 sm:px-10 md:px-14 select-none overflow-hidden"
     >
       {/* Background Graphic Asset with clean masking to eliminate ghost text */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden transform-gpu will-change-transform">
         <img
           src="/hero-retro-pc.jpg"
           alt="Rahul Pariharia Hero Retro Setup"
+          width={1920}
+          height={1080}
+          fetchPriority="high"
+          decoding="async"
           className="w-full h-full object-cover object-center lg:object-right filter brightness-[0.95] contrast-[1.05]"
         />
         {/* Left Dark Mask covering background text so live typography is crisp */}
@@ -59,7 +63,7 @@ export const Hero: React.FC = () => {
       {/* Main Responsive Interactive Canvas */}
       <motion.div
         style={{ y, opacity }}
-        className="max-w-[1600px] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 items-center my-auto relative z-10"
+        className="max-w-[1600px] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 items-center my-auto relative z-10 will-change-transform"
       >
         
         {/* =========================================

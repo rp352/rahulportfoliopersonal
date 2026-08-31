@@ -8,10 +8,15 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = () => {
   const [scrolled, setScrolled] = useState(false);
 
-  // Track scroll position
+  // Track scroll position only on threshold crossings to eliminate redundant renders
   useEffect(() => {
+    let prevScrolled = false;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
+      const isScrolled = window.scrollY > 30;
+      if (isScrolled !== prevScrolled) {
+        prevScrolled = isScrolled;
+        setScrolled(isScrolled);
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -20,7 +25,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 transform-gpu ${
         scrolled
           ? 'bg-[#0a0a0c]/85 backdrop-blur-md py-4 border-b border-white/5 shadow-2xl'
           : 'bg-transparent py-6'

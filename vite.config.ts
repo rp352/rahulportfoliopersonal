@@ -16,6 +16,17 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom'],
+          'vendor-framer': ['framer-motion'],
+          'vendor-gsap': ['gsap', 'gsap/ScrollTrigger'],
+          'vendor-lenis': ['lenis'],
+          'vendor-icons': ['lucide-react'],
+        },
+      },
+    },
   },
 });
 

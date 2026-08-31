@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, MotionProps } from 'framer-motion';
 
 export type TextScrambleProps = {
@@ -23,17 +23,23 @@ export function TextScramble({
   onScrambleComplete,
   ...props
 }: TextScrambleProps) {
-  const [displayText, setDisplayText] = useState(children);
-  const [isScrambling, setIsScrambling] = useState(false);
+  const textRef = useRef<HTMLSpanElement>(null);
+  const isScramblingRef = useRef(false);
 
   const scramble = () => {
-    if (isScrambling) return;
-    setIsScrambling(true);
+    if (isScramblingRef.current || !textRef.current) return;
+    isScramblingRef.current = true;
 
     const steps = Math.floor(duration / speed);
     let step = 0;
 
     const interval = setInterval(() => {
+      if (!textRef.current) {
+        clearInterval(interval);
+        isScramblingRef.current = false;
+        return;
+      }
+
       let scrambled = '';
       const progress = step / steps;
 
@@ -50,13 +56,15 @@ export function TextScramble({
         }
       }
 
-      setDisplayText(scrambled);
+      textRef.current.textContent = scrambled;
       step++;
 
       if (step > steps) {
         clearInterval(interval);
-        setDisplayText(children);
-        setIsScrambling(false);
+        if (textRef.current) {
+          textRef.current.textContent = children;
+        }
+        isScramblingRef.current = false;
         onScrambleComplete?.();
       }
     }, speed * 1000);
@@ -74,7 +82,7 @@ export function TextScramble({
       onMouseEnter={scramble}
       {...props}
     >
-      {displayText}
+      <span ref={textRef}>{children}</span>
     </motion.div>
   );
 }

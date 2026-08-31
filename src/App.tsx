@@ -27,13 +27,12 @@ export const App: React.FC = () => {
   // Initialize Ultra-Smooth Lenis Scroll with GSAP Ticker Sync
   useEffect(() => {
     const lenis = new Lenis({
-      lerp: 0.08,
-      duration: 1.2,
+      duration: 1.0,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 1.0,
-      touchMultiplier: 1.8,
+      touchMultiplier: 1.5,
     });
 
     setLenis(lenis);
@@ -55,6 +54,16 @@ export const App: React.FC = () => {
       setLenis(null);
     };
   }, []);
+
+  // Recalculate ScrollTrigger positions once preloader finishes and DOM fully reveals
+  useEffect(() => {
+    if (loadingComplete) {
+      const timer = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 120);
+      return () => clearTimeout(timer);
+    }
+  }, [loadingComplete]);
 
   return (
     <div className="min-h-screen bg-[#0a0a0c] text-[#f4f4f6] relative bg-grain overflow-x-hidden selection:bg-[#E25822] selection:text-[#ffffff]">

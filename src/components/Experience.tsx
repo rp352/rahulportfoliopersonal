@@ -117,7 +117,7 @@ export const Experience: React.FC = () => {
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-            className="relative"
+            className="relative transform-gpu will-change-transform"
           >
             {/* Layer 1: Distressed Cardboard Backing */}
             <div className="absolute -inset-3 bg-[#151210] rounded-3xl -rotate-1 border border-white/5 pointer-events-none opacity-80 shadow-2xl" />
@@ -161,6 +161,10 @@ export const Experience: React.FC = () => {
                     <img
                       src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&auto=format&fit=crop&q=80"
                       alt="Video Editing Footage Frame"
+                      loading="lazy"
+                      decoding="async"
+                      width={600}
+                      height={338}
                       className="w-full h-full object-cover opacity-80 filter contrast-125 group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />

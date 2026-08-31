@@ -30,7 +30,7 @@ export const BottomDock: React.FC<BottomDockProps> = () => {
           distance={130}
           panelHeight={54}
           spring={{ mass: 0.1, stiffness: 200, damping: 15 }}
-          className="bg-[#0e0e12]/90 border border-white/10 shadow-[0_15px_35px_rgba(0,0,0,0.8)] backdrop-blur-2xl px-3 py-2 rounded-2xl"
+          className="bg-[#0e0e12]/92 border border-white/10 shadow-[0_15px_35px_rgba(0,0,0,0.8)] backdrop-blur-md px-3 py-2 rounded-2xl transform-gpu"
         >
           {/* Home */}
           <DockItem onClick={() => scrollTo(0)}>

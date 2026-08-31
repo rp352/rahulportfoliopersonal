@@ -9,7 +9,7 @@ export const Education: React.FC = () => {
     offset: ['start 80%', 'end 70%'],
   });
 
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+  const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
     <section id="education" ref={containerRef} className="relative py-28 md:py-40 px-6 md:px-12 max-w-7xl mx-auto">
@@ -49,10 +49,10 @@ export const Education: React.FC = () => {
         {/* Background Vertical Track */}
         <div className="absolute left-2.5 sm:left-4 top-0 bottom-0 w-[1px] bg-white/10" />
 
-        {/* Animated Active Scroll Line */}
+        {/* Animated Active Scroll Line - Pure GPU transform scaleY with zero layout reflows */}
         <motion.div
-          style={{ height: lineHeight }}
-          className="absolute left-2.5 sm:left-4 top-0 w-[2px] bg-[#E25822] origin-top"
+          style={{ scaleY }}
+          className="absolute left-2.5 sm:left-4 top-0 bottom-0 w-[2px] bg-[#E25822] origin-top will-change-transform"
         />
 
         {/* Timeline Items */}

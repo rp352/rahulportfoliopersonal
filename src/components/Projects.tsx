@@ -203,7 +203,7 @@ export const Projects: React.FC = () => {
               key={project.id}
               layoutId={`folder-card-${project.id}`}
               onClick={() => setActiveProject(project)}
-              className="relative cursor-pointer group pt-7"
+              className="relative cursor-pointer group pt-7 transform-gpu will-change-transform"
               whileHover={{ y: -4 }}
               transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             >
