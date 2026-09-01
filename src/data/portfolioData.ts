@@ -116,6 +116,55 @@ export const skillsData: Skill[] = [
 
 export const projectsData: Project[] = [
   {
+    id: "portfolio-website",
+    title: "Portfolio Website",
+    type: "Web Application / Portfolio",
+    badge: "Personal Project",
+    category: "Web Application",
+    status: "Completed",
+    shortDescription: "My personal editorial portfolio website built with React, Vite, Tailwind CSS, Lenis, and Motion Primitives with retro-tech brutalist aesthetics.",
+    fullDescription: "An editorial portfolio engineered for fluid 60+ FPS performance, combining GSAP ScrollTrigger timeline orchestration, Lenis inertial smooth scrolling, hardware-accelerated motion layers, and responsive retro-tech visual telemetry.",
+    problemSolved: "Standard web portfolios frequently suffer from scroll stutter, bloated asset pipelines, and uninspired cookie-cutter aesthetics.",
+    solution: "Architected a custom dark-mode brutalist experience with fine-tuned Lenis smooth scrolling, decoupled custom cursor, and compositor-optimized transitions.",
+    techStack: ["React.js", "Tailwind CSS", "Framer Motion", "Lenis", "GSAP", "TypeScript"],
+    highlights: [
+      "Synchronized GSAP ticker and Lenis inertial scrolling engine",
+      "Hardware-accelerated compositor transitions and zero layout reflows",
+      "Interactive folder popover card system with Framer Motion layoutId",
+      "Brutalist typography and retro-tech visual telemetry HUDs",
+      "Direct 1:1 hardware mouse tracking cursor"
+    ],
+    keyFeatures: [
+      {
+        title: "Inertial Smooth Scroll",
+        description: "Custom Lenis configuration synchronized into GSAP animation frame loops.",
+        icon: "Move"
+      },
+      {
+        title: "Folder Tab Popover",
+        description: "Interactive project folders that morph into full inspection modals.",
+        icon: "Folder"
+      },
+      {
+        title: "Telemetry & Coordinates HUD",
+        description: "Real-time aesthetic visual counters and technical spec readouts.",
+        icon: "Activity"
+      }
+    ],
+    architecture: [
+      {
+        title: "Lenis + GSAP Loop",
+        details: "Unified animation frame ticker ensuring fluid 60+ FPS scrolling across all sections."
+      },
+      {
+        title: "Modular Component Structure",
+        details: "Atomic React component design with isolated state and lazy-loaded modal portals."
+      }
+    ],
+    githubUrl: "https://github.com/rp352/ARJUN-portfolio-website",
+    liveDemoUrl: "https://rahulpariharia.dev"
+  },
+  {
     id: "youtube-recommendation-extension",
     title: "YouTube Recommendation & Personalization Extension",
     type: "Browser Extension / AI-Oriented Project",
@@ -170,7 +219,7 @@ export const projectsData: Project[] = [
         details: "Clean dashboard for users to tweak target keywords, whitelist channels, and view real-time feed analytics."
       }
     ],
-    githubUrl: "https://github.com/rp352",
+    githubUrl: "https://github.com/rp352/youtube-doped-feed-",
     liveDemoUrl: "#"
   },
   {
@@ -228,7 +277,7 @@ export const projectsData: Project[] = [
         details: "Instant keyboard shortcuts to copy CSS rules, HEX color codes, or font declarations in standard formats."
       }
     ],
-    githubUrl: "https://github.com/rp352",
+    githubUrl: "https://github.com/rp352/design-inspector-",
     liveDemoUrl: "#"
   },
   {
