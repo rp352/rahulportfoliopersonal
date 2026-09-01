@@ -2,10 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Globe,
-  Bot,
-  Calendar,
-  Calculator,
-  Sun,
+  Layers,
   Puzzle,
   X,
   ArrowRight,
@@ -45,64 +42,22 @@ const projects: ProjectFolder[] = [
     previewType: 'portfolio',
   },
   {
-    id: 'ai-study-assistant',
+    id: 'design-inspector',
     num: '02',
-    tabTitle: 'AI Study Assistant',
-    title: 'AI Study Assistant',
+    tabTitle: 'Design Inspector',
+    title: 'Design Inspector',
     year: '2026',
     description:
-      'An AI-powered academic assistant that synthesizes engineering lecture notes, generates conceptual flashcards, and provides adaptive test prep.',
-    techStack: ['Python', 'OpenAI API', 'FastAPI', 'JavaScript', 'Tailwind CSS'],
-    icon: Bot,
+      'Design Inspector is a browser extension I built to make reverse-engineering web interfaces easier. Select an element on any webpage and instantly explore the design information behind it, from typography and colors to structure and dimensions.',
+    techStack: ['JavaScript', 'Manifest V3', 'Chrome Extension APIs', 'CSS3', 'DOM APIs'],
+    icon: Layers,
     githubUrl: 'https://github.com/rp352',
     liveUrl: '#',
-    previewType: 'ai',
-  },
-  {
-    id: 'event-management',
-    num: '03',
-    tabTitle: 'Event Management System',
-    title: 'Event Management System',
-    year: '2025',
-    description:
-      'A streamlined event registration and schedule platform with real-time seat availability, automated RSVP confirmations, and QR ticketing.',
-    techStack: ['Node.js', 'Express', 'MongoDB', 'JavaScript', 'HTML5', 'CSS3'],
-    icon: Calendar,
-    githubUrl: 'https://github.com/rp352',
-    liveUrl: '#',
-    previewType: 'event',
-  },
-  {
-    id: 'cgpa-calculator',
-    num: '04',
-    tabTitle: 'CGPA Calculator',
-    title: 'CGPA & Academic Calculator',
-    year: '2025',
-    description:
-      'Interactive semester grade predictor customized for the Lovely Professional University grading scale with target SGPA forecast models.',
-    techStack: ['JavaScript (ES6+)', 'Tailwind CSS', 'HTML5', 'Local Storage'],
-    icon: Calculator,
-    githubUrl: 'https://github.com/rp352',
-    liveUrl: '#',
-    previewType: 'cgpa',
-  },
-  {
-    id: 'weather-dashboard',
-    num: '05',
-    tabTitle: 'Weather Dashboard',
-    title: 'Atmospheric Weather Dashboard',
-    year: '2025',
-    description:
-      'Real-time weather station fetching live meteorological telemetry, 7-day barometric forecasts, humidity levels, and dynamic radar maps.',
-    techStack: ['JavaScript', 'OpenWeather API', 'Chart.js', 'CSS Grid'],
-    icon: Sun,
-    githubUrl: 'https://github.com/rp352',
-    liveUrl: '#',
-    previewType: 'weather',
+    previewType: 'extension',
   },
   {
     id: 'youtube-extension',
-    num: '06',
+    num: '03',
     tabTitle: 'YouTube Recommendation Ext',
     title: 'YouTube Recommendation & Feed Extension',
     year: '2026',
@@ -408,7 +363,7 @@ export const Projects: React.FC = () => {
                   </button>
 
                   <span className="tracking-widest font-semibold text-[#f4f4f6]">
-                    {activeProject.num} / 06
+                    {activeProject.num} / 0{projects.length}
                   </span>
 
                   <button
