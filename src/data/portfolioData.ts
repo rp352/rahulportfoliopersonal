@@ -230,6 +230,60 @@ export const projectsData: Project[] = [
     ],
     githubUrl: "https://github.com/rp352",
     liveDemoUrl: "#"
+  },
+  {
+    id: "inventory-management-system",
+    title: "Inventory Management System",
+    type: "Web Application / Dashboard",
+    badge: "Full-Stack Project",
+    category: "Web Application",
+    status: "Active Build",
+    shortDescription: "A comprehensive inventory & logistics management platform designed to track stock levels, manage sales orders, monitor deliveries, and organize customer profiles with real-time analytics.",
+    fullDescription: "Built with React and modern Vite tooling, this inventory management suite streamlines operational tracking across stock cataloging, sales desk ordering, shipping logistics, and customer profile management in a unified interface.",
+    problemSolved: "Small to medium businesses often struggle with fragmented spreadsheets for tracking stock, customer contacts, sales orders, and delivery statuses.",
+    solution: "Developed an interactive dashboard and modular management system supporting live inventory monitoring, multi-status order workflows, and shipping updates.",
+    techStack: ["React 19", "Vite", "JavaScript", "CSS3", "HTML5"],
+    highlights: [
+      "Real-time inventory stock level monitoring & low stock alerts",
+      "Interactive sales order desk with status tracking",
+      "Logistics & shipping dispatch management",
+      "Customer directory and profile history",
+      "Fast modular UI with responsive dashboard views"
+    ],
+    keyFeatures: [
+      {
+        title: "Stock & Inventory Control",
+        description: "Tracks item quantities, categorization, and automatic low-stock notifications.",
+        icon: "Package"
+      },
+      {
+        title: "Sales Order Desk",
+        description: "Manages purchase workflows from invoice generation to payment status.",
+        icon: "ShoppingCart"
+      },
+      {
+        title: "Logistics & Delivery Tracker",
+        description: "Monitors shipping stages, delivery carriers, and estimated arrivals.",
+        icon: "Truck"
+      },
+      {
+        title: "Customer Profiles",
+        description: "Centralizes buyer records, order histories, and contact telemetry.",
+        icon: "Users"
+      }
+    ],
+    architecture: [
+      {
+        title: "State Management Engine",
+        details: "Dynamic tab routing and reactive state synchronization across inventory, order desks, and shipping modules."
+      },
+      {
+        title: "Component Architecture",
+        details: "Modular functional React components with optimized rendering cycles and instant search filters."
+      }
+    ],
+    githubUrl: "https://github.com/rp352/project-5k",
+    liveDemoUrl: "#"
   }
 ];
 

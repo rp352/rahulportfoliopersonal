@@ -3,7 +3,7 @@ export interface Project {
   title: string;
   type: string;
   badge: string;
-  category: 'Browser Extension' | 'AI & Web' | 'Developer Tool';
+  category: 'Browser Extension' | 'AI & Web' | 'Developer Tool' | 'Web Application';
   shortDescription: string;
   fullDescription: string;
   problemSolved: string;

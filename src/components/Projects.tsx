@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Globe,
   Layers,
+  Package,
   Puzzle,
   X,
   ArrowRight,
@@ -56,8 +57,22 @@ const projects: ProjectFolder[] = [
     previewType: 'extension',
   },
   {
-    id: 'youtube-extension',
+    id: 'inventory-management',
     num: '03',
+    tabTitle: 'Inventory Management',
+    title: 'Inventory Management System',
+    year: '2026',
+    description:
+      'A comprehensive inventory & logistics management platform designed to track stock levels, manage sales orders, monitor deliveries, and organize customer profiles with real-time analytics.',
+    techStack: ['React 19', 'Vite', 'JavaScript', 'CSS3', 'HTML5'],
+    icon: Package,
+    githubUrl: 'https://github.com/rp352/project-5k',
+    liveUrl: '#',
+    previewType: 'portfolio',
+  },
+  {
+    id: 'youtube-extension',
+    num: '04',
     tabTitle: 'YouTube Recommendation Ext',
     title: 'YouTube Recommendation & Feed Extension',
     year: '2026',
