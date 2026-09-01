@@ -23,6 +23,13 @@
     color: #ffffff;
   }
 
+  /* Hide default cursor on desktop fine pointer devices */
+  @media (pointer: fine) {
+    *, *::before, *::after {
+      cursor: none !important;
+    }
+  }
+
   /* Minimal custom scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
