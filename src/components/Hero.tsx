@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { scrollToTarget } from '../lib/scroll';
 import { TextScramble } from './ui/text-scramble';
+import { TextLoop } from './ui/text-loop';
 
 export const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -105,25 +106,26 @@ export const Hero: React.FC = () => {
               Computer Science Student
             </motion.h2>
 
-            {/* building with code, AI & */}
+            {/* building with [TextLoop: code / AI / the web] */}
             <motion.h2
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.85rem] text-[#555562] leading-[1.12] whitespace-normal sm:whitespace-nowrap"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.85rem] text-[#555562] leading-[1.12] flex items-baseline flex-wrap gap-x-2 sm:gap-x-3"
             >
-              building with code, AI &
-            </motion.h2>
-
-            {/* the web. (with square red/orange period) */}
-            <motion.h2
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.85rem] text-[#555562] leading-[1.12] flex items-baseline"
-            >
-              <span>the web</span>
-              <span className="inline-block w-2.5 h-2.5 sm:w-3 sm:h-3 bg-[#E25822] ml-1.5 mb-1" />
+              <span>building with</span>
+              <span className="inline-flex items-baseline">
+                <TextLoop
+                  className="overflow-y-clip"
+                  interval={2.2}
+                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <span>code</span>
+                  <span>AI</span>
+                  <span>the web</span>
+                </TextLoop>
+                <span className="inline-block w-2.5 h-2.5 sm:w-3 sm:h-3 bg-[#E25822] ml-1.5 mb-0.5 sm:mb-1 self-baseline" />
+              </span>
             </motion.h2>
 
           </div>
