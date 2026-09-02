@@ -116,7 +116,7 @@ export const Hero: React.FC = () => {
               <span>building with</span>
               <span className="inline-flex items-baseline">
                 <TextLoop
-                  className="overflow-y-clip"
+                  className="overflow-y-clip text-[#ffffff]"
                   interval={2.2}
                   transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 >
