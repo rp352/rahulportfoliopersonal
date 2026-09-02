@@ -39,7 +39,7 @@ const projects: ProjectFolder[] = [
     techStack: ['React.js', 'Tailwind CSS', 'Framer Motion', 'Lenis', 'TypeScript'],
     icon: Globe,
     githubUrl: 'https://github.com/rp352/ARJUN-portfolio-website',
-    liveUrl: 'https://rahulpariharia.dev',
+    liveUrl: 'https://arjun-portfolio-website-tau.vercel.app/',
     previewType: 'portfolio',
   },
   {

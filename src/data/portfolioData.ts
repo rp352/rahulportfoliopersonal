@@ -21,7 +21,7 @@ export const personalInfo = {
   phone: "+91-9082135895",
   githubUrl: "https://github.com/rp352",
   linkedinUrl: "https://www.linkedin.com/in/rahul-pariharia/",
-  portfolioUrl: "https://rahulpariharia.dev",
+  portfolioUrl: "https://arjun-portfolio-website-tau.vercel.app/",
   status: "First-Year B.Tech CSE Student @ LPU",
   availabilityStatus: "Open to Collaborations & Freelance Projects",
   
@@ -162,7 +162,7 @@ export const projectsData: Project[] = [
       }
     ],
     githubUrl: "https://github.com/rp352/ARJUN-portfolio-website",
-    liveDemoUrl: "https://rahulpariharia.dev"
+    liveDemoUrl: "https://arjun-portfolio-website-tau.vercel.app/"
   },
   {
     id: "youtube-recommendation-extension",

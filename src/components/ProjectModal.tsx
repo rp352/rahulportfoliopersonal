@@ -146,6 +146,17 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onC
               </div>
 
               <div className="flex items-center space-x-4">
+                {project.liveDemoUrl && project.liveDemoUrl !== '#' && (
+                  <a
+                    href={project.liveDemoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-5 py-2.5 rounded-full bg-[#E25822] text-black font-mono text-xs font-semibold tracking-wider uppercase hover:bg-[#ff5500] transition-all flex items-center space-x-2"
+                  >
+                    <span>Visit Website</span>
+                    <span>↗</span>
+                  </a>
+                )}
                 <a
                   href={project.githubUrl}
                   target="_blank"
